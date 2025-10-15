@@ -75,8 +75,21 @@ router.put('/:id', isAuthenticated, (req, res) => {
 // -------------------------------
 
 //Deletar um usuário
-router.delete('/:id', isAuthenticated, (req, res) => {
-  res.json({ message: "Deletou uma sensorData"})
+router.delete('/:id', isAuthenticated, async (req, res) => {
+  const { id } = req.params;
+  console.log(req.query);
+
+  let _id = null;
+
+  try {
+    _id = new mongoose.Types.ObjectId(id);
+  } catch(error) {
+    return res.status(400).json({message: "ID inválido"});
+  }
+  
+  //res.json({ message: "Deletou uma sensorData"})
+  await SensorData.delete(_id);
+
 });
 
 module.exports = router;
