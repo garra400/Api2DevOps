@@ -15,15 +15,17 @@ const sensorDatas = []; // Array de usuários ("Banco de dados");
 
 // -----  Criação das rotas / Definição dos Endpoints
 
-// Obter todos os usuários ou por nome
+// Obter todos os usuários ou por sensorId
 router.get('/', [isAuthenticated], async function(req, res, next) {
   // Pro MongoDB, é como se o banco fosse uma coleção de objetos
-  const { name = ''} = req.query;
+  const { sensorId = ''} = req.query;
   console.log(req.query);
   // Parâmetro a ser enviado é a claúsula "Where", servindo de filtro
   return res.json(
-    await SensorData.find({name: { $regex: '.*' + name + '.*' } })); 
+    await SensorData.find({sensorId})); 
 });
+
+// -------------------------------------------------------
 
 // Obter um usuário por ID
 //(params) => {instruções que precisam ser executas} // Arrow Function
@@ -88,8 +90,9 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
   }
   
   //res.json({ message: "Deletou uma sensorData"})
-  await SensorData.delete(_id);
-
+  const response = await SensorData.deleteOne(_id);
+  console.log(response)
+  // TO DO: Adicionar condição para testar se o deletedCount > 1
 });
 
 module.exports = router;

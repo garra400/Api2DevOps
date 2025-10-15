@@ -1,22 +1,40 @@
-@URL=http://localhost:3000/users
+@URL=http://localhost:3000/sensors
 
-### CRIAR USUARIO
+### CRIAR SENSORDATA ### OBS: Precisa colocar que é JSON
 POST {{URL}}
 Content-Type: application/json
 
 {
-    "name": "Juca",
-    "email": "juca@gmail.com",
-    "password": "1234"
+    "sensorId": "2",
+    "dataValue": "10"
+}
+
+### Obter todos as SensorDatas (Sem validação)
+GET {{URL}}
+Content-Type: application/json
+
+{
+    "sensorId": "1",
+    "dataValue": "10"
+}
+
+### Obter todos as SensorDatas (Com validação)
+GET {{URL}}
+Content-Type: application/json
+Authorization: 1234
+
+{
+    "sensorId": "1",
+    "dataValue": "10"
 }
 
 
-### Obter todos os usuários
-GET {{URL}}?name
+### OBTER USUÁRIOS POR ID (Com validação) ###
+GET {{URL}}/68efe6b228b78f864288e937
+Content-Type: application/json
 Authorization: 1234
 
-
-
-### Obter um por Id
-GET {{URL}}/63372f8ad58b92203f526def
+### OBTER USUÁRIOS POR ID (Com validação) ###
+DELETE {{URL}}/68efe6b228b78f864288e937
+Content-Type: application/json
 Authorization: 1234
