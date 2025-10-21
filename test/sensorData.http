@@ -5,8 +5,8 @@ POST {{URL}}
 Content-Type: application/json
 
 {
-    "sensorId": "2",
-    "dataValue": "10"
+    "sensorId": "42",
+    "dataValue": "420"
 }
 
 ### --------------------------------------------- ###
@@ -21,7 +21,7 @@ Content-Type: application/json
 Authorization: 1234
 
 ### OBTER SENSORDATAS POR ID (Com validação) ###
-GET {{URL}}/68efe62528b78f864288e92e
+GET {{URL}}/68f7c187950e22892b8b98d5
 Content-Type: application/json
 Authorization: 1234
 

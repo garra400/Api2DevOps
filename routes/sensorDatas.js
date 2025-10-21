@@ -19,10 +19,10 @@ const sensorDatas = []; // Array de usuários ("Banco de dados");
 router.get('/', [isAuthenticated], async function(req, res, next) {
   // Pro MongoDB, é como se o banco fosse uma coleção de objetos
   const { sensorId = ''} = req.query;
-  console.log(req.query);
+  //console.log(req.query);
   // Parâmetro a ser enviado é a claúsula "Where", servindo de filtro
   return res.json(
-    await SensorData.find({sensorId})); 
+    await SensorData.find({sensorId: { $regex: '.*' + sensorId + '.*' } })); 
 });
 
 // -------------------------------------------------------
