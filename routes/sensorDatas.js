@@ -113,8 +113,9 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
   //Condição para testar o deletedCount
   if ((response.deletedCount) > 0){
     console.log("Registro "+id+" deletado!");
+    return res.json({message: "Registro "+id+" deletado!"})
   } else {
-    console.log("Não foi excluído nenhum registro!");
+    return res.status(404).json({ message: "Não foi excluído nenhum registro!" });
   }
   
 });

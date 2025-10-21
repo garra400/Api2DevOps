@@ -21,7 +21,7 @@ Content-Type: application/json
 Authorization: 1234
 
 ### OBTER SENSORDATAS POR ID (Com validação) ###
-GET {{URL}}/68efe6a128b78f864288e934
+GET {{URL}}/68efe61c28b78f864288e929
 Content-Type: application/json
 Authorization: 1234
 
@@ -40,5 +40,5 @@ Content-Type: application/json
 Authorization: 1234
 
 {
-    "dataValue": "423"
+    "dataValue": "420"
 }
