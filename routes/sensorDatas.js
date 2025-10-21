@@ -9,7 +9,7 @@ var router = express.Router();
 // -------------------------------------------------------
 
 // ----- Definição de variáveis e constantes
-const sensorDatas = []; // Array de usuários ("Banco de dados");
+const sensorDatas = []; // Array de sensorDatas ("Banco de dados") - Não utilizado;
 
 // -------------------------------------------------------
 
@@ -47,7 +47,7 @@ router.get('/:id', isAuthenticated, async (req, res) => {
     : res.status(404).json({ message: "SensorData não ecxiste!!" });
 });
 
-// -------------------------------
+// --------------------------------------------------------------
 
 //Criar um Sensor Data
 router.post('/', async (req, res) => {
@@ -67,14 +67,30 @@ router.post('/', async (req, res) => {
     : res.json(await sensorData.save()); // Salva o usuário e envia a resposta
 });
 
-// -------------------------------
+// --------------------------------------------------------------
 
 //Atualizar um Sensor Data
-router.put('/:id', isAuthenticated, (req, res) => {
-  res.json({ message: "Atualizou uma sensorData"})
+router.put('/:id', isAuthenticated, async (req, res) => {
+  const { id } = req.params;
+  console.log(req.query);
+
+  let _id = null;
+
+  try {
+    _id = new mongoose.Types.ObjectId(id);
+  } catch(error) {
+    return res.status(400).json({message: "ID inválido"});
+  }
+  
+  //res.json({ message: "Atualizou uma sensorData"})
+  req.body.updatedAt = Date.now();
+  const response = await SensorData.findOneAndUpdate(_id, req.body);
+  return response 
+    ? res.json(response)
+    : res.status(404).json({ message: "SensorData não ecxiste!!" });
 });
 
-// -------------------------------
+// --------------------------------------------------------------
 
 //Deletar um Sensor Data
 router.delete('/:id', isAuthenticated, async (req, res) => {

@@ -21,21 +21,24 @@ Content-Type: application/json
 Authorization: 1234
 
 ### OBTER SENSORDATAS POR ID (Com validação) ###
-GET {{URL}}/68f7c187950e22892b8b98d5
+GET {{URL}}/68efe6a128b78f864288e934
 Content-Type: application/json
 Authorization: 1234
 
 ### --------------------------------------------- ###
 
 ### DELETAR SENSORDATAS POR ID (Com validação) ###
-DELETE {{URL}}/68efe62528b78f864288e92e
+DELETE {{URL}}/68efe61c28b78f864288e929
 Content-Type: application/json
 Authorization: 1234
 
 ### --------------------------------------------- ###
 
 ### ATUALIZAR SENSORDATAS POR ID (Com validação) ###
-UPDATE {{URL}}/68efe6b228b78f864288e937
+PUT {{URL}}/68efe61c28b78f864288e929
 Content-Type: application/json
 Authorization: 1234
 
+{
+    "dataValue": "423"
+}
