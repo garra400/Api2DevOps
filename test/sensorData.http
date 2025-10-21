@@ -9,32 +9,33 @@ Content-Type: application/json
     "dataValue": "10"
 }
 
+### --------------------------------------------- ###
+
 ### Obter todos as SensorDatas (Sem validação)
 GET {{URL}}
 Content-Type: application/json
-
-{
-    "sensorId": "1",
-    "dataValue": "10"
-}
 
 ### Obter todos as SensorDatas (Com validação)
 GET {{URL}}
 Content-Type: application/json
 Authorization: 1234
 
-{
-    "sensorId": "1",
-    "dataValue": "10"
-}
-
-
-### OBTER USUÁRIOS POR ID (Com validação) ###
-GET {{URL}}/68efe6b228b78f864288e937
+### OBTER SENSORDATAS POR ID (Com validação) ###
+GET {{URL}}/68efe62528b78f864288e92e
 Content-Type: application/json
 Authorization: 1234
 
-### OBTER USUÁRIOS POR ID (Com validação) ###
-DELETE {{URL}}/68efe6b228b78f864288e937
+### --------------------------------------------- ###
+
+### DELETAR SENSORDATAS POR ID (Com validação) ###
+DELETE {{URL}}/68efe62528b78f864288e92e
 Content-Type: application/json
 Authorization: 1234
+
+### --------------------------------------------- ###
+
+### ATUALIZAR SENSORDATAS POR ID (Com validação) ###
+UPDATE {{URL}}/68efe6b228b78f864288e937
+Content-Type: application/json
+Authorization: 1234
+

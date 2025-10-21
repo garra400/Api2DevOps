@@ -15,7 +15,7 @@ const sensorDatas = []; // Array de usuários ("Banco de dados");
 
 // -----  Criação das rotas / Definição dos Endpoints
 
-// Obter todos os usuários ou por sensorId
+// Obter todos os Sensor Datas
 router.get('/', [isAuthenticated], async function(req, res, next) {
   // Pro MongoDB, é como se o banco fosse uma coleção de objetos
   const { sensorId = ''} = req.query;
@@ -27,7 +27,7 @@ router.get('/', [isAuthenticated], async function(req, res, next) {
 
 // -------------------------------------------------------
 
-// Obter um usuário por ID
+// Obter um Sensor Data por ID
 //(params) => {instruções que precisam ser executas} // Arrow Function
 router.get('/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params;
@@ -49,7 +49,7 @@ router.get('/:id', isAuthenticated, async (req, res) => {
 
 // -------------------------------
 
-//Criar um usuário
+//Criar um Sensor Data
 router.post('/', async (req, res) => {
   // Obter o JSON vindo pelo Body da requisição HTTP
   const json = req.body;
@@ -69,14 +69,14 @@ router.post('/', async (req, res) => {
 
 // -------------------------------
 
-//Atualizar um usuário
+//Atualizar um Sensor Data
 router.put('/:id', isAuthenticated, (req, res) => {
   res.json({ message: "Atualizou uma sensorData"})
 });
 
 // -------------------------------
 
-//Deletar um usuário
+//Deletar um Sensor Data
 router.delete('/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params;
   console.log(req.query);
@@ -91,8 +91,16 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
   
   //res.json({ message: "Deletou uma sensorData"})
   const response = await SensorData.deleteOne(_id);
-  console.log(response)
-  // TO DO: Adicionar condição para testar se o deletedCount > 1
+  
+  console.log(response);
+
+  //Condição para testar o deletedCount
+  if ((response.deletedCount) > 0){
+    console.log("Registro "+id+" deletado!");
+  } else {
+    console.log("Não foi excluído nenhum registro!");
+  }
+  
 });
 
 module.exports = router;
