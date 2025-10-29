@@ -1,0 +1,44 @@
+@URL=http://localhost:3000/sensors
+
+### CRIAR SENSORDATA ### OBS: Precisa colocar que é JSON
+POST {{URL}}
+Content-Type: application/json
+
+{
+    "sensorId": "42",
+    "dataValue": "420"
+}
+
+### --------------------------------------------- ###
+
+### Obter todos as SensorDatas (Sem validação)
+GET {{URL}}
+Content-Type: application/json
+
+### Obter todos as SensorDatas (Com validação)
+GET {{URL}}
+Content-Type: application/json
+Authorization: 1234
+
+### OBTER SENSORDATAS POR ID (Com validação) ###
+GET {{URL}}/68efe61c28b78f864288e929
+Content-Type: application/json
+Authorization: 1234
+
+### --------------------------------------------- ###
+
+### DELETAR SENSORDATAS POR ID (Com validação) ###
+DELETE {{URL}}/68efe61c28b78f864288e929
+Content-Type: application/json
+Authorization: 1234
+
+### --------------------------------------------- ###
+
+### ATUALIZAR SENSORDATAS POR ID (Com validação) ###
+PUT {{URL}}/68efe61c28b78f864288e929
+Content-Type: application/json
+Authorization: 1234
+
+{
+    "dataValue": "420"
+}
