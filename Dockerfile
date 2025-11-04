@@ -22,6 +22,10 @@ RUN chown -R node:node /app
 # 7. AGORA sim, muda para o usuário não-privilegiado
 USER node
 
+# Install application dependencies
+# This command runs 'npm install' inside the container
+RUN npm install
+
 # 8. Expõe a porta
 EXPOSE 3000
 
