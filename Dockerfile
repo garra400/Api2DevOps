@@ -9,6 +9,10 @@ WORKDIR /app
 # 3. Copia os arquivos de dependência (ainda como root)
 COPY package*.json ./
 
+# Install application dependencies
+# This command runs 'npm install' inside the container
+RUN npm install
+
 # 4. Instala as dependências (ainda como root)
 # O npm tem permissão para criar /app/node_modules
 RUN npm ci --omit=dev
@@ -21,10 +25,6 @@ RUN chown -R node:node /app
 
 # 7. AGORA sim, muda para o usuário não-privilegiado
 USER node
-
-# Install application dependencies
-# This command runs 'npm install' inside the container
-RUN npm install
 
 # 8. Expõe a porta
 EXPOSE 3000
