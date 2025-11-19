@@ -23,7 +23,9 @@ mongoose.connect(MONGO_URL, {
 
 // Rotas usadas
 var indexRouter = require('./routes/index');
+
 var sensorDatasRouter = require('./routes/sensorDatas');
+var sensorAlertRouter = require('./routes/sensorAlert');
 
 var app = express();
 
@@ -35,7 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Rotas
 app.use('/', indexRouter);
+
 app.use('/sensors', sensorDatasRouter);
+app.use('/alert', sensorAlertRouter);
 
 module.exports = app;
 
