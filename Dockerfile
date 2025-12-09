@@ -9,13 +9,9 @@ WORKDIR /app
 # 3. Copia os arquivos de dependência (ainda como root)
 COPY package*.json ./
 
-# Install application dependencies
-# This command runs 'npm install' inside the container
-RUN npm install
-
 # 4. Instala as dependências (ainda como root)
 # O npm tem permissão para criar /app/node_modules
-RUN npm ci --omit=dev
+RUN npm install
 
 # 5. Copia o resto do código da aplicação (ainda como root)
 COPY . .
