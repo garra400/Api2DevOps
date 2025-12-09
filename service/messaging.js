@@ -1,15 +1,30 @@
 const amqp = require('amqplib');
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';
-const ALERT_QUEUE = 'alertas';
+const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://devops:devops@localhost:5672';
+const ALERT_QUEUE = 'alerts_queue';
 
-async function sendAlertMessage(alert) {
-  const conn = await amqp.connect(RABBITMQ_URL);
-  const channel = await conn.createChannel();
-  await channel.assertQueue(ALERT_QUEUE, { durable: false });
-  channel.sendToQueue(ALERT_QUEUE, Buffer.from(JSON.stringify(alert)));
-  await channel.close();
-  await conn.close();
+let connection;
+let channel;
+
+async function connect() {
+  if (channel) return channel;
+
+  connection = await amqp.connect(RABBIT_URL);
+  channel = await connection.createChannel();
+  await channel.assertQueue(ALERT_QUEUE, { durable: true });
+
+  console.log('[RabbitMQ] Conectado e fila assertada:', ALERT_QUEUE);
+  return channel;
 }
 
-module.exports = { sendAlertMessage };
+async function sendAlertMessage(message) {
+  const ch = await connect();
+  const payload = Buffer.from(JSON.stringify(message));
+
+  ch.sendToQueue(ALERT_QUEUE, payload, { persistent: true });
+  console.log('[RabbitMQ] Mensagem enviada para fila', ALERT_QUEUE, message);
+}
+
+module.exports = {
+  sendAlertMessage,
+};
