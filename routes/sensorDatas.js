@@ -3,6 +3,7 @@ var express = require('express');
 const SensorData = require("../models/SensorData.js");
 const isAuthenticated = require("../middlewares/isAuthenticated.js");
 const { default: mongoose } = require('mongoose');
+const { processSensorData } = require('../service/alertLogic');
 var router = express.Router();
 
 
@@ -62,9 +63,21 @@ router.post('/', async (req, res) => {
 
   const hasErros = sensorData.validateSync(); // Faz validação 
 
-  return hasErros 
-    ? res.status(400).json(hasErros) // Envia a resp. com os erros
-    : res.json(await sensorData.save()); // Salva o usuário e envia a resposta
+  if (hasErros) {
+    return res.status(400).json(hasErros); // Envia a resp. com os erros
+  }
+  
+  const savedData = await sensorData.save();
+  
+  // Processa alertas se temperatura/umidade estiverem presentes
+  if (json.temperatura !== undefined || json.humidade !== undefined) {
+    await processSensorData({
+      temperatura: json.temperatura,
+      umidade: json.humidade
+    });
+  }
+  
+  return res.json(savedData); // Salva o usuário e envia a resposta
 });
 
 // --------------------------------------------------------------

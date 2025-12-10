@@ -9,7 +9,7 @@ let channel;
 async function connect() {
   if (channel) return channel;
 
-  connection = await amqp.connect(RABBIT_URL);
+  connection = await amqp.connect(RABBITMQ_URL);
   channel = await connection.createChannel();
   await channel.assertQueue(ALERT_QUEUE, { durable: true });
 
